@@ -1,0 +1,24 @@
+{
+    "name": "carpenterjs",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://deadman999@bitbucket.org/deadman999/carpenterjs.git",
+    "author": "Tomasz Koziara <tomaszkoziara86@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "watch_server": "webpack --config webpack.server.js --watch",
+        "build_server": "webpack --config webpack.server.js",
+        "run_server": "nodemon -r source-map-support/register dist/server.bundle.js"
+    },
+    "devDependencies": {
+        "babel-core": "^6.26.0",
+        "babel-loader": "^7.1.2",
+        "babel-polyfill": "^6.26.0",
+        "babel-preset-env": "^1.6.1",
+        "koa": "^2.4.1",
+        "koa-router": "^7.3.0",
+        "mysql": "^2.15.0",
+        "pkg": "^4.3.0-beta.4",
+        "webpack": "^3.10.0"
+    }
+}
