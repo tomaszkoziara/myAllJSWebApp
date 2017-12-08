@@ -12,12 +12,11 @@ export class DBConnector {
         this.connectionPool = mysql.createPool(this.dbConfig);
     }
 
-    async getUsers() {
-
-        var data = new Promise(function (connectionPool) {
+    async executeQuery(query) {
+        return new Promise(function (connectionPool) {
             return function (resolve, reject) {
                 connectionPool.getConnection(function (error, connection) {
-                    connection.query('SELECT * FROM USERS', function (error, results, fields) {
+                    connection.query(query, function (error, results, fields) {
                         connection.release();
                         if (error) {
                             reject(error);
@@ -28,8 +27,22 @@ export class DBConnector {
 
             }
         }(this.connectionPool));
+    }
 
+    async getUsers() {
+        var data = await this.executeQuery('SELECT * FROM USERS');
         return data;
+    }
+
+    async getUser(id) {
+        var data = await this.executeQuery('SELECT * FROM USERS WHERE ID = ' + id);
+        return data;
+    }
+
+    async insertUser(user) {
+        const queryString = mysql.format("INSERT INTO USERS SET ?", user);
+        var data = await this.executeQuery(queryString);
+        return data.id;
     }
 
 }
