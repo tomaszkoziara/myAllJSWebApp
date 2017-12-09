@@ -29,20 +29,4 @@ export class DBConnector {
         }(this.connectionPool));
     }
 
-    async getUsers() {
-        var data = await this.executeQuery('SELECT * FROM USERS');
-        return data;
-    }
-
-    async getUser(id) {
-        var data = await this.executeQuery('SELECT * FROM USERS WHERE ID = ' + id);
-        return data;
-    }
-
-    async insertUser(user) {
-        const queryString = mysql.format("INSERT INTO USERS SET ?", user);
-        var data = await this.executeQuery(queryString);
-        return data.id;
-    }
-
 }

@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const path = require("path");
 
 module.exports = {
@@ -13,7 +14,8 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.js$/, loader: "babel-loader", exclude: /node_modules/ }
+            { test: /\.js$/, loader: ["babel-loader"], exclude: /node_modules/ }
         ]
-    }
+    },
+    plugins: [new webpack.BannerPlugin({ banner: "#!/usr/bin/env node", raw: true })]
 };
