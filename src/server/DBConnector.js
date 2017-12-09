@@ -12,12 +12,11 @@ export class DBConnector {
         this.connectionPool = mysql.createPool(this.dbConfig);
     }
 
-    async getUsers() {
-
-        var data = new Promise(function (connectionPool) {
+    async executeQuery(query) {
+        return new Promise(function (connectionPool) {
             return function (resolve, reject) {
                 connectionPool.getConnection(function (error, connection) {
-                    connection.query('SELECT * FROM USERS', function (error, results, fields) {
+                    connection.query(query, function (error, results, fields) {
                         connection.release();
                         if (error) {
                             reject(error);
@@ -28,8 +27,6 @@ export class DBConnector {
 
             }
         }(this.connectionPool));
-
-        return data;
     }
 
 }
