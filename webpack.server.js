@@ -7,6 +7,10 @@ module.exports = {
         "./src/server/index.js"
     ],
     target: "node",
+    node: {
+        __dirname: false,
+        __filename: false,
+    },
     devtool: "source-map",
     output: {
         path: path.resolve("dist"),

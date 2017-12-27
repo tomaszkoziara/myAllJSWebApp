@@ -8,20 +8,35 @@
     "scripts": {
         "watch_server": "webpack --config webpack.server.js --watch",
         "build_server": "webpack --config webpack.server.js",
+        "watch_client": "webpack --config webpack.client.js --watch",
+        "build_client": "webpack --config webpack.client.js",
         "run_server": "nodemon -r source-map-support/register dist/server.bundle.js"
     },
     "devDependencies": {
+        "angular": "^1.6.8",
+        "angular-ui-bootstrap": "^2.5.6",
+        "angular-ui-router": "^1.0.3",
         "babel-core": "^6.26.0",
         "babel-loader": "^7.1.2",
+        "babel-plugin-transform-class-properties": "^6.24.1",
         "babel-polyfill": "^6.26.0",
         "babel-preset-env": "^1.6.1",
         "bcryptjs": "^2.4.3",
+        "bootstrap": "^3.3.7",
+        "css-loader": "^0.28.7",
+        "file-loader": "^1.1.6",
+        "html-loader": "^0.5.1",
+        "html-webpack-plugin": "^2.30.1",
+        "jquery": "^3.2.1",
         "koa": "^2.4.1",
         "koa-bodyparser": "^4.2.0",
         "koa-router": "^7.3.0",
+        "koa-static": "^4.0.2",
         "mysql": "^2.15.0",
         "pkg": "^4.3.0-beta.4",
+        "popper": "^1.0.1",
         "sqlstring": "^2.3.0",
+        "style-loader": "^0.19.1",
         "webpack": "^3.10.0"
     }
 }

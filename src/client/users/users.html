@@ -1,0 +1,25 @@
+<h1>Utenti</h1>
+<div ng-controller="UsersController as ctrl">
+    <table class="table">
+        <thead>
+            <tr>
+                <td scope="col">Id</td>
+                <td scope="col">Nome</td>
+                <td scope="col">Cognome</td>
+                <td scope="col">Username</td>
+                <td scope="col">Data creazione</td>
+                <td scope="col">Data ultima modifica</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in ctrl.users">
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.surname}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.i_date}}</td>
+                <td>{{user.u_date}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
