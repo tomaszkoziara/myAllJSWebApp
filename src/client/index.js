@@ -10,6 +10,9 @@ import APIService from "./common/APIService";
 import UserService from "./users/UserService";
 import usersComponent from "./users/usersComponent";
 import UsersController from "./users/UsersController";
+import LotService from "./lots/LotService";
+import lotsComponent from "./lots/lotsComponent";
+import LotsController from "./lots/LotsController";
 
 import routes from './routes'
 
@@ -18,4 +21,7 @@ angular.module("carpenterjs", [uirouter, angularUIBootstrap])
     .service("UserService", UserService)
     .controller("UsersController", UsersController)
     .component("usersComponent", usersComponent)
+    .service("LotService", LotService)
+    .controller("LotsController", LotsController)
+    .component("lotsComponent", lotsComponent)
     .config(routes);

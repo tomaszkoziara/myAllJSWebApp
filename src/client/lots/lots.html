@@ -1,0 +1,49 @@
+<div ng-controller="LotsController as ctrl" class="panel panel-default">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <h1>Distinte</h1>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td scope="col">Codice</td>
+                    <td scope="col">Essenza</td>
+                    <td scope="col">Classe</td>
+                    <td scope="col">Situazione</td>
+                    <td scope="col">Stagionatura</td>
+                    <td scope="col">Lavorazione</td>
+                    <td scope="col">Cliente</td>
+                    <td scope="col">Lunghezza m</td>
+                    <td scope="col">Spessore m</td>
+                    <td scope="col">mq</td>
+                    <td scope="col">Data inserimento</td>
+                    <td scope="col">Totale</td>
+                    <td scope="col">Pezzi</td>
+                    <td scope="col">Azioni</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="lot in ctrl.lots">
+                    <td>{{lot.code}}</td>
+                    <td>{{lot.type}}</td>
+                    <td>{{lot.class}}</td>
+                    <td>{{lot.status}}</td>
+                    <td>{{lot.aging}}</td>
+                    <td>{{lot.processing}}</td>
+                    <td>{{lot.customer}}</td>
+                    <td>{{lot.length}}</td>
+                    <td>{{lot.thickness}}</td>
+                    <td>{{lot.volume}}</td>
+                    <td>{{lot.i_date}}</td>
+                    <td>{{lot.total}}</td>
+                    <td>{{lot.pieces}}</td>
+                    <td>
+                        <a href="#">
+                            <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

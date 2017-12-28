@@ -1,9 +1,11 @@
 import Router from "koa-router";
 import UserService from "./UserService";
+import LotService from "./LotService";
 
 export default function createRoutes(dbConnector) {
     var router = new Router();
     var userService = new UserService(dbConnector);
+    var lotService = new LotService(dbConnector);
 
     router
         .get("/api/users", async function (context, next) {
@@ -33,6 +35,14 @@ export default function createRoutes(dbConnector) {
             } else {
                 context.body = outcome.result;
             }
+        })
+        .get("/api/lots", async function (context, next) {
+            var lots = await lotService.getLots();
+            context.body = lots;
+        })
+        .get("/api/lots/:id", async function (context, next) {
+            var lot = await lotService.getLot(context.params.id);
+            context.body = lot;
         });
 
     return router.routes();

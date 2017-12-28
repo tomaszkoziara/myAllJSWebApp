@@ -10,5 +10,8 @@ export default function routes($stateProvider, $urlRouterProvider) {
         }).state("users", {
             url: "/users",
             template: require("./users/users.html")
+        }).state("lots", {
+            url: "/lots",
+            template: require("./lots/lots.html")
         });
 }

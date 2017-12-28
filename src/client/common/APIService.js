@@ -8,11 +8,8 @@ class APIService {
     }
 
     get(url) {
-        // var self = this;
-
         return this.$q((resolve, reject) => {
             this.$http.get(url).then((response) => {
-                debugger
                 if (response.status === 200) {
                     resolve(response.data.result);
                 }
@@ -21,6 +18,6 @@ class APIService {
     }
 
 }
- 
+
 
 export default APIService;
