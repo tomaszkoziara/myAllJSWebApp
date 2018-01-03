@@ -36,7 +36,6 @@ export default class UserService {
     async deleteUser(id) {
         const sql = SqlString.format("DELETE FROM users WHERE ID = ?", id);
         var data = await this.dbConnector.executeQuery(sql);
-        console.log(data);
         return new Outcome(data.affectedRows === 1, "");
     }
 

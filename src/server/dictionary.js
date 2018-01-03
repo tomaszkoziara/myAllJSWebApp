@@ -2,7 +2,9 @@ const messages = {
     "old_password_mismatch": "La vecchia password non corrisponde.",
     "password_updated": "Password aggiornata.",
     "user_inserted": "Utente inserito con successo.",
-    "user_min_properties_not_set": "Non sono stati settati i parametri obbligatori per inserire l'utente."
+    "user_min_properties_not_set": "Non sono stati settati i parametri obbligatori per inserire l'utente.",
+
+    "lot_inserted": "Distinta inserita con successo."
 };
 
 export default function getMessage(key) {

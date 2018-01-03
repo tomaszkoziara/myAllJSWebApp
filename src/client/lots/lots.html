@@ -1,25 +1,33 @@
-<div ng-controller="LotsController as ctrl" class="panel panel-default">
-    <div class="table-wrapper">
-        <div class="table-title">
-            <h1>Distinte</h1>
+<div ng-controller="LotsController as ctrl">
+    <div class="title-bar">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Elenco distinte</h1>
+                <a href ng-click="ctrl.goToCreateLotDetail()" class="btn btn-primary pull-right">
+                    <i class="fa fa-plus"></i>
+                    <span>Nuova distinta</span>
+                </a>
+            </div>
         </div>
+    </div>
+    <div class="table-wrapper">
         <table class="table">
             <thead>
                 <tr>
-                    <td scope="col">Codice</td>
-                    <td scope="col">Essenza</td>
-                    <td scope="col">Classe</td>
-                    <td scope="col">Situazione</td>
-                    <td scope="col">Stagionatura</td>
-                    <td scope="col">Lavorazione</td>
-                    <td scope="col">Cliente</td>
-                    <td scope="col">Lunghezza m</td>
-                    <td scope="col">Spessore m</td>
-                    <td scope="col">mq</td>
-                    <td scope="col">Data inserimento</td>
-                    <td scope="col">Totale</td>
-                    <td scope="col">Pezzi</td>
-                    <td scope="col">Azioni</td>
+                    <th scope="col">Codice</th>
+                    <th scope="col">Essenza</th>
+                    <th scope="col">Classe</th>
+                    <th scope="col">Situazione</th>
+                    <th scope="col">Stagionatura</th>
+                    <th scope="col">Lavorazione</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Lunghezza m</th>
+                    <th scope="col">Spessore m</th>
+                    <th scope="col">mq</th>
+                    <th scope="col">Data inserimento</th>
+                    <th scope="col">Totale</th>
+                    <th scope="col">Pezzi</th>
+                    <th scope="col">Azioni</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,13 +42,21 @@
                     <td>{{lot.length}}</td>
                     <td>{{lot.thickness}}</td>
                     <td>{{lot.volume}}</td>
-                    <td>{{lot.i_date}}</td>
+                    <td>{{lot.i_date | date:"dd/MM/yyyy"}}</td>
                     <td>{{lot.total}}</td>
                     <td>{{lot.pieces}}</td>
                     <td>
-                        <a href="#">
-                            <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
-                        </a>
+                        <div class="row">
+                            <a href ng-click="ctrl.goToLotDetail(lot.id)">
+                                <i class="fa fa-edit fa-2x"></i>
+                            </a>
+                            <a href ng-click="ctrl.deleteLot(lot.id)">
+                                <i class="fa fa-trash-o fa-2x"></i>
+                            </a>
+                            <a href>
+                                <i class="fa fa-calculator fa-2x"></i>
+                            </a>
+                        </div>
                     </td>
                 </tr>
             </tbody>

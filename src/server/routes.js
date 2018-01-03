@@ -7,16 +7,16 @@ export default function createRoutes(dbConnector) {
     var userService = new UserService(dbConnector);
     var lotService = new LotService(dbConnector);
 
-    router
-        .get("/api/users", async function (context, next) {
+    router.prefix("/api/users")
+        .get("/", async function (context, next) {
             var users = await userService.getUsers();
             context.body = users;
         })
-        .get("/api/users/:id", async function (context, next) {
+        .get("/:id", async function (context, next) {
             var users = await userService.getUser(context.params.id);
             context.body = users;
         })
-        .post("/api/users", async function (context, next) {
+        .post("/", async function (context, next) {
             var params = context.request.body;
 
             var outcome = await userService.insertUser(params);
@@ -27,22 +27,54 @@ export default function createRoutes(dbConnector) {
                 context.body = outcome.result;
             }
         })
-        .delete("/api/users/:id", async function (context, next) {
+        .delete("/:id", async function (context, next) {
             var outcome = await userService.deleteUser(context.params.id);
-            console.log(outcome);
+            if (!outcome.result) {
+                context.throw(400, outcome.message);
+            } else {
+                context.body = outcome.result;
+            }
+        });
+    router.prefix("/api/lots")
+        .get("/statuses", async function (context, next) {
+            var statuses = await lotService.getLotStatuses();
+            context.body = statuses;
+        })
+        .get("/", async function (context, next) {
+            var lots = await lotService.getLots();
+            context.body = lots;
+        })
+        .post("/", async function (context, next) {
+            var params = context.request.body;
+
+            var outcome = await lotService.insertLot(params);
             if (!outcome.result) {
                 context.throw(400, outcome.message);
             } else {
                 context.body = outcome.result;
             }
         })
-        .get("/api/lots", async function (context, next) {
-            var lots = await lotService.getLots();
-            context.body = lots;
-        })
-        .get("/api/lots/:id", async function (context, next) {
+        .get("/:id", async function (context, next) {
             var lot = await lotService.getLot(context.params.id);
             context.body = lot;
+        })
+        .put("/:id", async function (context, next) {
+            var params = context.request.body;
+
+            var outcome = await lotService.updateLot(context.params.id, params);
+            if (!outcome.result) {
+                context.throw(400, outcome.message);
+            } else {
+                context.body = outcome.result;
+            }
+        })
+        .delete("/:id", async function (context, next) {
+            var outcome = await lotService.deleteLot(context.params.id);
+            if (!outcome.result) {
+                context.throw(400, outcome.message);
+            } else {
+                context.body = outcome.result;
+            }
         });
 
     return router.routes();

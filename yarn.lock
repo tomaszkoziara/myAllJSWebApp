@@ -113,6 +113,14 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+angular-async-await@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/angular-async-await/-/angular-async-await-1.1.2.tgz#e493da869c791ecb2a48fd27a5f4ec6366003cdf"
+
+angular-growl-v2-webpack@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/angular-growl-v2-webpack/-/angular-growl-v2-webpack-1.0.1.tgz#28ab92f073387485faade312ed3cf543067a02f4"
+
 angular-ui-bootstrap@^2.5.6:
   version "2.5.6"
   resolved "https://registry.yarnpkg.com/angular-ui-bootstrap/-/angular-ui-bootstrap-2.5.6.tgz#23937322ec641a6fbee16498cc32452aa199e7c5"
@@ -2314,6 +2322,10 @@ find-up@^2.0.0, find-up@^2.1.0:
 flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
+
+font-awesome@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
 
 for-in@^1.0.1:
   version "1.0.2"

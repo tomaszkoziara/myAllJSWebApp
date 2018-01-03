@@ -17,6 +17,36 @@ class APIService {
         });
     }
 
+    post(url, params) {
+        return this.$q((resolve, reject) => {
+            this.$http.post(url, params).then((response) => {
+                if (response.status === 200) {
+                    resolve(true);
+                }
+            });
+        });
+    }
+
+    put(url, params) {
+        return this.$q((resolve, reject) => {
+            this.$http.put(url, params).then((response) => {
+                if (response.status === 200) {
+                    resolve(true);
+                }
+            });
+        });
+    }
+
+    delete(url) {
+        return this.$q((resolve, reject) => {
+            this.$http.delete(url).then((response) => {
+                if (response.status === 200) {
+                    resolve(response.data.result);
+                }
+            });
+        });
+    }
+
 }
 
 

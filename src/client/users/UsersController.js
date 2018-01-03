@@ -16,6 +16,10 @@ class UsersController {
 
     }
 
+    goToUserDetail() {
+
+    }
+
 }
 
 export default UsersController;

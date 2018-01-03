@@ -1,0 +1,83 @@
+<div ng-controller="LotController as ctrl">
+    <div class="title-bar">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>{{ctrl.title()}}</h1>
+                <button type="button" class="btn btn-success pull-right" ng-disabled="!ctrl.isFormDirty()" ng-click="ctrl.saveLot()">
+                    Salva
+                </button>
+            </div>
+        </div>
+    </div>
+    <form name="lotForm">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="code">Codice</label>
+                    <input class="form-control" id="code" ng-model="ctrl.lot.code" maxlength="50">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="customer">Cliente</label>
+                    <input class="form-control" id="customer" ng-model="ctrl.lot.customer" maxlength="50">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="status">Stato</label>
+                    <select class="form-control" ng-model="ctrl.lot.status">
+                        <option ng-repeat="option in ctrl.lotStatuses" ng-value="option.id">{{option.name}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="type">Tipo</label>
+                    <input class="form-control" id="type" ng-model="ctrl.lot.type" maxlength="50">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="class">Classe</label>
+                    <input class="form-control" id="class" ng-model="ctrl.lot.class" maxlength="50">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="aging">Stagionatura</label>
+                    <input class="form-control" id="aging" ng-model="ctrl.lot.aging" maxlength="50">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="processing">Lavorazione</label>
+                    <input class="form-control" id="processing" ng-model="ctrl.lot.processing" maxlength="50">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="length">Lunghezza</label>
+                    <input class="form-control" id="length" ng-model="ctrl.lot.length" type="number" ng-maxlength="10">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="thickness">Spessore</label>
+                    <input class="form-control" id="thickness" ng-model="ctrl.lot.thickness" type="number" ng-maxlength="10">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="volume">Volume</label>
+                    <input class="form-control" id="volume" ng-model="ctrl.lot.volume" type="number" ng-maxlength="10">
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

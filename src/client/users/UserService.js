@@ -8,7 +8,6 @@ class UserService {
     }
 
     getUsers() {
-        // var self = this;
         return this.APIService.get("/api/users");
     }
 }
