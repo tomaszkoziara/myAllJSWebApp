@@ -40,6 +40,10 @@ class LotController {
         }
     }
 
+    goToLots() {
+        this.$state.go("lots");
+    }
+
     $onInit() {
         var self = this;
         this.id = parseInt(this.$state.params.id);

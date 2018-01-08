@@ -11,6 +11,8 @@ import "angular-ui-bootstrap/dist/ui-bootstrap-csp.css";
 import "font-awesome/css/font-awesome.min.css"
 import "./main.css";
 
+import ModalService from "./common/modal-service/ModalService";
+import ModalController from "./common/modal-service/ModalController";
 import APIService from "./common/APIService";
 import HeaderController from "./common/HeaderController";
 import UserService from "./users/UserService";
@@ -25,9 +27,11 @@ import routes from './routes'
 
 angular.module("carpenterjs", [uirouter, angularUIBootstrap, angularGrowl])
     .service("APIService", APIService)
+    .service("ModalService", ModalService)
     .service("UserService", UserService)
     .service("LotService", LotService)
 
+    .controller("ModalController", ModalController)
     .controller("HeaderController", HeaderController)
     .controller("UsersController", UsersController)
     .controller("LotsController", LotsController)

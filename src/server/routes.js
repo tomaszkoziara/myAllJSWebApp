@@ -1,13 +1,14 @@
 import Router from "koa-router";
+import KoaCompose from "koa-compose";
 import UserService from "./UserService";
 import LotService from "./LotService";
 
 export default function createRoutes(dbConnector) {
-    var router = new Router();
     var userService = new UserService(dbConnector);
     var lotService = new LotService(dbConnector);
 
-    router.prefix("/api/users")
+    const usersRouter = new Router();
+    usersRouter.prefix("/api/users")
         .get("/", async function (context, next) {
             var users = await userService.getUsers();
             context.body = users;
@@ -35,7 +36,9 @@ export default function createRoutes(dbConnector) {
                 context.body = outcome.result;
             }
         });
-    router.prefix("/api/lots")
+
+    const lotsRouter = new Router();
+    lotsRouter.prefix("/api/lots")
         .get("/statuses", async function (context, next) {
             var statuses = await lotService.getLotStatuses();
             context.body = statuses;
@@ -77,6 +80,8 @@ export default function createRoutes(dbConnector) {
             }
         });
 
-    return router.routes();
+    const composedRoutes = KoaCompose([usersRouter.routes(), lotsRouter.routes()]);
+
+    return composedRoutes;
 }
 
