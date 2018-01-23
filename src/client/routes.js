@@ -13,5 +13,8 @@ export default function routes($stateProvider, $urlRouterProvider) {
         }).state("lot", {
             url: "/lot/{id}",
             template: require("./lots/lot.html")
+        }).state("version", {
+            url: "/lot/{id}/version",
+            template: require("./versions/version.html")
         });
 }

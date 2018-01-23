@@ -12,11 +12,11 @@ export class DBConnector {
         this.connectionPool = mysql.createPool(this.dbConfig);
     }
 
-    async executeQuery(query) {
+    async executeQuery(query, parameters) {
         return new Promise(function (connectionPool) {
             return function (resolve, reject) {
                 connectionPool.getConnection(function (error, connection) {
-                    connection.query(query, function (error, results, fields) {
+                    connection.query(query, parameters, function (error, results, fields) {
                         connection.release();
                         if (error) {
                             reject(error);
@@ -27,6 +27,10 @@ export class DBConnector {
 
             }
         }(this.connectionPool));
+    }
+
+    async getConnection() {
+        return connectionPool.getConnection();
     }
 
 }

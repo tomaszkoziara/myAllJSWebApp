@@ -78,6 +78,55 @@ export default function createRoutes(dbConnector) {
             } else {
                 context.body = outcome.result;
             }
+        })
+        .get("/:id/versions/last", async function (context, next) {
+            var outcome = await lotService.getLastLotVersion(context.params.id);
+            if (!outcome.result) {
+                context.throw(400, outcome.message);
+            } else {
+                context.body = outcome;
+            }
+        })
+        .get("/:lotId/versions", async function (context, next) {
+            var outcome = await lotService.getLotVersions(context.params.lotId);
+            if (!outcome.result) {
+                context.throw(400, outcome.message);
+            } else {
+                context.body = outcome;
+            }
+        })
+        .get("/:lotId/versions/:versionId", async function (context, next) {
+            var outcome = await lotService.getLotVersion(context.params.lotId, context.params.versionId);
+            if (!outcome.result) {
+                context.throw(400, outcome.message);
+            } else {
+                context.body = outcome;
+            }
+        })
+        .post("/:id/versions/:versionId/measures", async function (context, next) {
+            // create a bunch of new measure for a version (later)
+            context.body = { "result": "create a bunch of new measure for a version (later)" };
+        })
+        .put("/:lotId/versions/:versionId/measures", async function (context, next) {
+            var outcome = await lotService.updateVersionMeasures(context.params.lotId, context.params.versionId, context.request.body);
+            if (!outcome.result) {
+                context.throw(400, outcome.message);
+            } else {
+                context.body = outcome.result;
+            }
+        })
+        .post("/:lotId/versions", async function (context, next) {
+            var params = context.request.body;
+            params.thickness = parseInt(params.thickness);
+            params.length = parseInt(params.length);
+            params.width = parseInt(params.width);
+
+            var outcome = await lotService.duplicateVersion(context.params.lotId, params);
+            if (!outcome.result) {
+                context.throw(400, outcome.message);
+            } else {
+                context.body = outcome;
+            }
         });
 
     const composedRoutes = KoaCompose([usersRouter.routes(), lotsRouter.routes()]);

@@ -1,50 +1,45 @@
 class APIService {
 
-    static $inject = ['$http', '$q'];
+    static $inject = ["$http", "$q", "NotificationService"];
 
-    constructor($http, $q) {
+    constructor($http, $q, NotificationService) {
+
         this.$http = $http;
         this.$q = $q;
+        this.NotificationService = NotificationService;
+
+    }
+
+    callHTTPMethod(verb, url, params) {
+
+        return this.$q((resolve, reject) => {
+            resolve(this.$http[verb](url, params));
+        }).then((response) => {
+            if (response.status === 200) {
+                return response.data.result;
+            } else {
+                this.NotificationService.error(response.data.message);
+            }
+        }).catch(() => {
+            this.NotificationService.error("Si è verificato un errore.");
+        });
+
     }
 
     get(url) {
-        return this.$q((resolve, reject) => {
-            this.$http.get(url).then((response) => {
-                if (response.status === 200) {
-                    resolve(response.data.result);
-                }
-            });
-        });
+        return this.callHTTPMethod("get", url);
     }
 
     post(url, params) {
-        return this.$q((resolve, reject) => {
-            this.$http.post(url, params).then((response) => {
-                if (response.status === 200) {
-                    resolve(true);
-                }
-            });
-        });
+        return this.callHTTPMethod("post", url, params);
     }
 
     put(url, params) {
-        return this.$q((resolve, reject) => {
-            this.$http.put(url, params).then((response) => {
-                if (response.status === 200) {
-                    resolve(true);
-                }
-            });
-        });
+        return this.callHTTPMethod("put", url, params);
     }
 
     delete(url) {
-        return this.$q((resolve, reject) => {
-            this.$http.delete(url).then((response) => {
-                if (response.status === 200) {
-                    resolve(response.data.result);
-                }
-            });
-        });
+        return this.callHTTPMethod("delete", url);
     }
 
 }

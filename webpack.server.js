@@ -1,4 +1,5 @@
 const webpack = require("webpack");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require("path");
 
 module.exports = {
@@ -21,5 +22,14 @@ module.exports = {
             { test: /\.js$/, loader: ["babel-loader"], exclude: /node_modules/ }
         ]
     },
-    plugins: [new webpack.BannerPlugin({ banner: "#!/usr/bin/env node", raw: true })]
+    plugins: [
+        new webpack.BannerPlugin({
+            banner: "#!/usr/bin/env node",
+            raw: true
+        }),
+        new CopyWebpackPlugin([{
+            from: "src/server.properties",
+            to: "server.properties"
+        }])
+    ]
 };

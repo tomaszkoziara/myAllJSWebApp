@@ -202,3 +202,19 @@ table.table .avatar {
 .title-bar *{
     display: inline;
 }
+
+.version-pagination {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.version-pagination div {
+    display: inline-block;
+    min-width: 200px;
+    text-align: center;
+}
+
+.crossed {
+    text-decoration: line-through;
+}

@@ -1,0 +1,74 @@
+<div ng-controller="VersionController as ctrl">
+    <div class="title-bar">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Versione misure</h1>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-info" ng-disabled="ctrl.isMeasuresFormDirty()"
+                        ng-click="ctrl.openNewVersionModal()">
+                        Nuova versione
+                    </button>
+                    <button type="button" class="btn btn-success" ng-disabled="!ctrl.isMeasuresFormDirty()"
+                        ng-click="ctrl.updateMeasures()">
+                        Salva
+                    </button>
+                    <button type="button" class="btn btn-danger" ng-disabled="!ctrl.isMeasuresFormDirty()"
+                        ng-click="ctrl.resetMeasuresForm();">
+                        Annulla
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="version-pagination">
+        <button type="button" class="btn btn-primary" ng-click="ctrl.versionBack()">
+            <i class="fa fa-arrow-left fa-2x"></i>
+        </button>
+        <div>
+            <h4>Versione #{{ctrl.currentVersionNumber}}</h4>
+        </div>
+        <button type="button" class="btn btn-primary" ng-click="ctrl.versionForth()">
+            <i class="fa fa-arrow-right fa-2x"></i>
+        </button>
+    </div>
+    <div class="table-wrapper">
+        <form name="ctrl.measuresForm">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Numero</th>
+                        <th scope="col">Cancellato</th>
+                        <th scope="col">Spessore</th>
+                        <th scope="col">Lunghezza</th>
+                        <th scope="col">Larghezza</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="measure in ctrl.version.measures">
+                        <td>{{$index + 1}}</td>
+                        <td>
+                            <input class="form-check-input" ng-model="measure.delete" ng-disabled="{{measure.d_date !== null}}"
+                                type="checkbox" ng-checked="{{measure.d_date !== null}}"
+                                ng-change="ctrl.markAsChanged($index)">
+                        </td>
+                        <td>
+                            <input class="form-control" ng-model="measure.thickness" ng-disabled="{{measure.d_date !== null || ctrl.measuresDisabled()}}"
+                                type="number" ng-maxlength="10" ng-change="ctrl.markAsChanged($index)"
+                                ng-class="{ 'crossed' : measure.d_date !== null }">
+                        </td>
+                        <td>
+                            <input class="form-control" ng-model="measure.length" ng-disabled="{{measure.d_date !== null || ctrl.measuresDisabled()}}"
+                                type="number" ng-maxlength="10" ng-change="ctrl.markAsChanged($index)"
+                                ng-class="{ 'crossed' : measure.d_date !== null }">
+                        </td>
+                        <td>
+                            <input class="form-control" ng-model="measure.width" ng-disabled="{{measure.d_date !== null || ctrl.measuresDisabled()}}"
+                                type="number" ng-maxlength="10" ng-change="ctrl.markAsChanged($index)"
+                                ng-class="{ 'crossed' : measure.d_date !== null }">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

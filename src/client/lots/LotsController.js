@@ -30,6 +30,10 @@ class LotsController {
         this.$state.go("lot", { id: null });
     }
 
+    goToVersionDetail(id) {
+        this.$state.go("version", { id: id });
+    }
+
     deleteLot(id) {
         var self = this;
         this.modalService.showConfirmModal({

@@ -49,14 +49,16 @@
                     <td>
                         <div class="row">
                             <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-default" ng-click="ctrl.goToLotDetail(lot.id)" title="Modifica distinta">
+                                <button type="button" class="btn btn-default" ng-click="ctrl.goToLotDetail(lot.id)"
+                                    title="Modifica distinta">
                                     <i class="fa fa-edit fa-2x"></i>
                                 </button>
                                 <button type="button" class="btn btn-default" ng-click="ctrl.deleteLot(lot.id)" title="Cancella distinta">
                                     <i class="fa fa-trash-o fa-2x"></i>
                                 </button>
-                                <button type="button" class="btn btn-default" title="Modifica misure">
-                                    <i class="fa fa-calculator fa-2x"></i>
+                                <button type="button" class="btn btn-default" ng-click="ctrl.goToVersionDetail(lot.id)"
+                                    title="Modifica misure">
+                                    <i class="fa fa-folder-open-o fa-2x"></i>
                                 </button>
                             </div>
                         </div>
