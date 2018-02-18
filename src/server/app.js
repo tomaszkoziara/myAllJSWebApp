@@ -3,24 +3,24 @@ import serve from "koa-static";
 import routes from "./routes"
 import path from "path";
 import { DBConnector } from "./DBConnector";
-import readProperties from "./PropertiesReader";
+import readConfiguration from "./ConfigurationReader";
 
 var bodyParser = require('koa-bodyparser');
 
-export async function runServer() {
+export async function runServer(configurationFilePath) {
 
     process.on('unhandledRejection', e => {
         throw e;
     });
 
-    const conf = await readProperties();
+    const conf = await readConfiguration(configurationFilePath);
     console.log("Configuration:\n");
     console.log(conf);
     console.log("\n");
 
     var app = new Koa();
 
-    var dbConnector = new DBConnector(conf.database.host, conf.database.user, conf.database.password, conf.database.schema);
+    var dbConnector = new DBConnector(conf.database.host, conf.database.port, conf.database.user, conf.database.password, conf.database.schema);
 
     const publicFolder = path.resolve(__dirname, "www");
     console.log("Public folder is " + publicFolder);

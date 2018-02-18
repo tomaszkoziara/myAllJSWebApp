@@ -2,10 +2,12 @@ import Router from "koa-router";
 import KoaCompose from "koa-compose";
 import UserService from "./UserService";
 import LotService from "./LotService";
+import PdfExportService from "./PdfExportService";
 
 export default function createRoutes(dbConnector) {
     var userService = new UserService(dbConnector);
     var lotService = new LotService(dbConnector);
+    var pdfExportService = new PdfExportService(lotService);
 
     const usersRouter = new Router();
     usersRouter.prefix("/api/users")
@@ -117,9 +119,9 @@ export default function createRoutes(dbConnector) {
         })
         .post("/:lotId/versions", async function (context, next) {
             var params = context.request.body;
-            params.thickness = parseInt(params.thickness);
-            params.length = parseInt(params.length);
-            params.width = parseInt(params.width);
+            params.thickness = parseFloat(params.thickness);
+            params.length = parseFloat(params.length);
+            params.width = parseFloat(params.width);
 
             var outcome = await lotService.duplicateVersion(context.params.lotId, params);
             if (!outcome.result) {
@@ -127,6 +129,26 @@ export default function createRoutes(dbConnector) {
             } else {
                 context.body = outcome;
             }
+        })
+        .get("/:lotId/pdf", async function (context, next) {
+
+            const stream = await pdfExportService.getMeasuresPdfStream(context.params.lotId, context);
+
+            context.response.set("Content-Disposition", 'attachment; filename="Export.pdf"');
+            context.response.set("Content-Type", "application/pdf");
+            context.body = stream;
+
+            console.log("after----------");
+
+
+
+            // context.type = "application/pdf";
+            // context.body = readStream;
+
+            // console.log();
+            // console.log("------------------");
+            // console.log(context.res);
+            // .pipe(context.res);
         });
 
     const composedRoutes = KoaCompose([usersRouter.routes(), lotsRouter.routes()]);

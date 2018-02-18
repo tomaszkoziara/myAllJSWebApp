@@ -30,6 +30,18 @@ module.exports = {
         new CopyWebpackPlugin([{
             from: "src/server.properties",
             to: "server.properties"
+        }, {
+            from: "src/server/pdf-assets",
+            to: "pdf-assets"
+        }, {
+            from: "node_modules/phantomjs-prebuilt/lib/phantom/bin",
+            to: "phantom/bin"
+        }, {
+            from: "node_modules/html-pdf/lib/scripts",
+            to: "scripts"
+        }, {
+            from: "src/server/pdf-creator/CreateStream.js",
+            to: "CreateStream.js"
         }])
     ]
 };

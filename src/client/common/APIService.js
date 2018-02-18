@@ -42,6 +42,10 @@ class APIService {
         return this.callHTTPMethod("delete", url);
     }
 
+    downloadFile(url) {
+        window.open(url);
+    }
+
 }
 
 

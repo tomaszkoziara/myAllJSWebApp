@@ -30,6 +30,10 @@ class LotService {
     getLotStatuses() {
         return this.APIService.get("/api/lots/statuses");
     }
+
+    getLotPdf(lotId) {
+        return this.APIService.downloadFile("/api/lots/" + lotId + "/pdf");
+    }
 }
 
 

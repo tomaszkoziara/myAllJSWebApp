@@ -2,9 +2,10 @@ var mysql = require("mysql");
 
 export class DBConnector {
 
-    constructor(host, user, password, database) {
+    constructor(host, port, user, password, database) {
         this.dbConfig = {
             host: host,
+            port: port,
             user: user,
             password: password,
             database: database
@@ -16,6 +17,9 @@ export class DBConnector {
         return new Promise(function (connectionPool) {
             return function (resolve, reject) {
                 connectionPool.getConnection(function (error, connection) {
+                    if (error) {
+                        throw error;
+                    }
                     connection.query(query, parameters, function (error, results, fields) {
                         connection.release();
                         if (error) {

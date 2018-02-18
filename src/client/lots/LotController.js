@@ -30,14 +30,45 @@ class LotController {
 
     saveLot() {
         if (this.id) {
-            this.lotService.updateLot(this.lot);
+            this.lotService.updateLot(this.lotForInsertUpdate());
             this.growl.info("Distinta aggiornata.");
             this.$state.go("lots");
         } else {
-            this.lotService.insertLot(this.lot);
+            this.lotService.insertLot(this.lotForInsertUpdate());
             this.growl.info("Distinta inserita.");
             this.$state.go("lots");
         }
+    }
+
+    lotForInsertUpdate() {
+
+        var lotForInsertUpdate = {};
+
+        var properties = [
+            "id",
+            "code",
+            "type",
+            "class",
+            "aging",
+            "processing",
+            "customer",
+            "length",
+            "thickness",
+            "volume"
+        ];
+
+        for (var i = 0; i < properties.length; i++) {
+
+            if (this.lot[properties[i]]) {
+                lotForInsertUpdate[properties[i]] = this.lot[properties[i]];
+            }
+
+        }
+
+        lotForInsertUpdate.status = this.lot.statusId;
+
+        return lotForInsertUpdate;
+
     }
 
     goToLots() {

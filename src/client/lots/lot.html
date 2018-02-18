@@ -31,7 +31,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="status">Stato</label>
-                    <select class="form-control" ng-model="ctrl.lot.status">
+                    <select class="form-control" ng-model="ctrl.lot.statusId">
                         <option ng-repeat="option in ctrl.lotStatuses" ng-value="option.id">{{option.name}}</option>
                     </select>
                 </div>
@@ -67,19 +67,22 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="length">Lunghezza</label>
-                    <input class="form-control" id="length" ng-model="ctrl.lot.length" type="number" ng-maxlength="10">
+                    <input class="form-control" id="length" ng-model="ctrl.lot.length" type="number"
+                        ng-maxlength="10">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="thickness">Spessore</label>
-                    <input class="form-control" id="thickness" ng-model="ctrl.lot.thickness" type="number" ng-maxlength="10">
+                    <input class="form-control" id="thickness" ng-model="ctrl.lot.thickness" type="number"
+                        ng-maxlength="10">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="volume">Volume</label>
-                    <input class="form-control" id="volume" ng-model="ctrl.lot.volume" type="number" ng-maxlength="10">
+                    <input class="form-control" id="volume" ng-model="ctrl.lot.volume" type="number"
+                        ng-maxlength="10">
                 </div>
             </div>
         </div>

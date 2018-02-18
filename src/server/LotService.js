@@ -6,7 +6,7 @@ import SqlString from "sqlstring";
 export default class UserService {
 
     static SELECT_LOTS = `SELECT
-        A.id, A.code, A.type, A.class, B.name AS status, B.code AS statusCode, A.aging,
+        A.id, A.code, A.type, A.class, A.status AS statusId, B.name AS status, B.code AS statusCode, A.aging,
         A.processing, A.customer, A.length, A.thickness, A.volume, A.i_date, A.total, A.pieces
         FROM lots AS A
         LEFT JOIN lot_statuses AS B
@@ -143,7 +143,8 @@ export default class UserService {
 
         const sql = SqlString.format(`SELECT id, number
             FROM lot_versions
-            WHERE id_lot = ?`, lotId);
+            WHERE id_lot = ?
+            ORDER BY number asc`, lotId);
         const data = await this.dbConnector.executeQuery(sql);
 
         return new Outcome(data, "");
@@ -201,25 +202,13 @@ export default class UserService {
     }
 
     _createLotForInsert(lot) {
-        return {
-            code: lot.code,
-            type: lot.type,
-            class: lot.class,
-            status: lot.status,
-            aging: lot.aging,
-            processing: lot.processing,
-            customer: lot.customer,
-            length: lot.length,
-            thickness: lot.thickness,
-            volume: lot.volume,
-            i_date: SqlString.raw("NOW()")
-        }
+        lot.i_date = SqlString.raw("NOW()");
+        return lot;
     }
 
     _createLotForUpdate(lot) {
-        var lotForUpdate = this._createLotForInsert(lot);
-        lotForUpdate.u_date = SqlString.raw('NOW()');
-        return lotForUpdate;
+        lot.u_date = SqlString.raw('NOW()');
+        return lot;
     }
 
 }

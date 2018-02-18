@@ -1,19 +1,23 @@
 import VersionService from "./VersionService";
+import LotService from "../lots/LotService";
 import ModalService from "../common/modal-service/ModalService"
 
 import newVersionModalTemplate from "./NewVersionModal.html";
 
 class VersionController {
-    static $inject = ["$state", "$scope", "$uibModal", "VersionService", "ModalService", "growl"];
+    static $inject = ["$state", "$scope", "$uibModal", "VersionService", "LotService", "ModalService", "growl"];
 
-    constructor($state, $scope, $uibModal, VersionService, ModalService, growl) {
+    constructor($state, $scope, $uibModal, VersionService, LotService, ModalService, growl) {
         this.name = "VersionController";
         this.$state = $state;
         this.$scope = $scope;
         this.$uibModal = $uibModal;
         this.versionService = VersionService;
+        this.lotService = LotService;
         this.modalService = ModalService;
         this.growl = growl;
+
+        this.total = 0;
     }
 
     $onInit() {
@@ -97,11 +101,22 @@ class VersionController {
             }
         }
 
-        this.versionService.updateMeasures(this.lotId, this.version.id, changedMeasures).then(() => {
-            this.growl.info("Misure aggiornate.");
-            this.loadVersion();
-            this.measuresForm.$setPristine();
-        });
+        this.versionService.updateMeasures(this.lotId, this.version.id, changedMeasures)
+            .then(() => {
+                var total = this.reckonTotal();
+                var pieces = this.reckonPieces();
+
+                return this.lotService.updateLot({
+                    id: this.lotId,
+                    total: total,
+                    pieces: pieces
+                });
+            })
+            .then(() => {
+                this.growl.info("Misure aggiornate.");
+                this.loadVersion();
+                this.measuresForm.$setPristine();
+            });
 
     }
 
@@ -153,6 +168,64 @@ class VersionController {
     measuresDisabled() {
 
         return this.versions && this.versions.length > 1;
+
+    }
+
+    showAddMeasure() {
+
+        return this.versions && this.versions.length === 1;
+
+    }
+
+    addNewMeasure() {
+
+        this.version.measures.push({
+            thickness: 0,
+            length: 0,
+            width: 0,
+            d_date: null
+        });
+
+    }
+
+    reckonPieces() {
+
+        var pieces = 0;
+
+        for (var i = 0; i < this.version.measures.length; i++) {
+            var measures = this.version.measures[i];
+
+            if (!measures.d_date && !measures.delete && measures.thickness && measures.length && measures.width) {
+                pieces++;
+            }
+
+        }
+
+        return pieces;
+
+    }
+
+    reckonTotal() {
+
+        var total = 0;
+
+        for (var i = 0; i < this.version.measures.length; i++) {
+            var measures = this.version.measures[i];
+
+            if (!measures.d_date && !measures.delete && measures.thickness && measures.length && measures.width) {
+
+                var partial = measures.thickness * measures.length * measures.width / 100000;
+                total += parseFloat(partial.toFixed(3));
+
+            }
+
+        }
+
+        if (total > 0) {
+            total = parseFloat((total / 100).toFixed(3))
+        }
+
+        return total;
 
     }
 

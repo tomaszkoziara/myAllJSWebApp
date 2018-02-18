@@ -1,0 +1,315 @@
+<html>
+
+<head></head>
+
+<body>
+    <style>
+        body {
+            margin-top: 1.7cm;
+            margin-bottom: 1.7cm;
+            margin-left: 1.7cm;
+            margin-right: 1.7cm;
+        }
+
+        .informazioni-distinta-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .informazioni-distinta-table tr td {
+            padding-left: 0.2cm;
+            padding-top: 0.05cm;
+            padding-bottom: 0.05cm;
+            border-bottom: 1px solid #999;
+
+            width: 25%;
+        }
+
+        .informazioni-distinta-table,
+        .informazioni-distinta-table th,
+        .informazioni-distinta-table td {
+            border: 1px solid black;
+        }
+
+        .misure-table {
+            margin-top: 0.5cm;
+            margin-bottom: 0.5cm;
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .misure-table thead tr td {
+            padding-bottom: 0.2cm;
+        }
+
+        .misure-table tr td {
+            padding-top: 0.05cm;
+            padding-bottom: 0.05cm;
+        }
+
+        .misure-table tr.odd {
+            background-color: #CCC;
+        }
+
+        .misure-table tr.even {
+            background-color: #FFF;
+        }
+
+        .misure-table,
+        .misure-table th,
+        .misure-table td {
+            border: 1px solid black;
+        }
+
+        .riepilogo-table {
+            margin-top: 0cm;
+            width: 60%;
+            border-collapse: collapse;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .riepilogo-table tr td {
+            padding-top: 0.1cm;
+            padding-bottom: 0.1cm;
+        }
+
+        .riepilogo-table,
+        .riepilogo-table th,
+        .riepilogo-table td {
+            border: 1px solid black;
+        }
+
+        .intestazione {
+            display: block;
+            margin-bottom: 0.1cm;
+        }
+
+        .intestazione .logo {
+            max-height: 2cm;
+            /* display: inline-block; */
+            position: absolute;
+        }
+
+        .intestazione .righe-intestazione {
+            /* display: inline-block; */
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            align-self: center;
+        }
+
+        .intestazione span {
+            display: block;
+        }
+
+        .contenitore-tabelle-misure {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            width: 100%;
+        }
+
+        .contenitore-tabelle-misure div {
+            width: 24%;
+            display: inline-block;
+        }
+    </style>
+    <div class="intestazione">
+        <img class="logo" src="file:///%ASSETS_PATH%logo-legnami-nicolis.jpg">
+        <div class="righe-intestazione">
+            <span>
+                <strong>Legnami Nicolis Srl</strong>
+            </span>
+            <span>Contrada Miranda, 13 37142 VERONA</span>
+            <br>
+            <span>Via Cogol, 4 37053 CEREA</span>
+            <span>Verona Tel 045 529971 - Cerea Tel 344 1850768</span>
+        </div>
+    </div>
+
+    <div>
+        <table class="informazioni-distinta-table">
+            <tbody>
+                <tr>
+                    <td class="intestazione-cell">N. int</td>
+                    <td>{{code}}</td>
+                    <td class="intestazione-cell">Essenza</td>
+                    <td>{{type}}</td>
+                </tr>
+                <tr>
+                    <td class="intestazione-cell">Classe</td>
+                    <td>{{class}}</td>
+                    <td class="intestazione-cell">Situazione</td>
+                    <td>{{status}}</td>
+                </tr>
+                <tr>
+                    <td class="intestazione-cell">Stagionatura</td>
+                    <td>{{aging}}</td>
+                    <td class="intestazione-cell">Lavorazione</td>
+                    <td>{{processing}}</td>
+                </tr>
+                <tr>
+                    <td class="intestazione-cell">Cliente</td>
+                    <td>{{customer}}</td>
+                    <td class="intestazione-cell">Lunghezza m</td>
+                    <td>{{length}}</td>
+                </tr>
+                <tr>
+                    <td class="intestazione-cell">Spessore m</td>
+                    <td>{{thickness}}</td>
+                    <td class="intestazione-cell">MQ</td>
+                    <td>{{volume}}</td>
+                </tr>
+                <tr>
+                    <td class="intestazione-cell">Data ins.</td>
+                    <td>{{i_date}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="contenitore-tabelle-misure">
+        <div>
+            <table class="misure-table">
+                <thead>
+                    <tr>
+                        <td>N</td>
+                        <td>Spess</td>
+                        <td>Lung</td>
+                        <td>Larg</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each measures1}}
+                    <tr nobr="true">
+                        <td>
+                            X
+                        </td>
+                        <td>
+                            {{this.thickness}}
+                        </td>
+                        <td>
+                            {{this.length}}
+                        </td>
+                        <td>
+                            {{this.width}}
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table class="misure-table">
+                <thead>
+                    <tr>
+                        <td>N</td>
+                        <td>Spess</td>
+                        <td>Lung</td>
+                        <td>Larg</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each measures2}}
+                    <tr nobr="true">
+                        <td>
+                            X
+                        </td>
+                        <td>
+                            {{this.thickness}}
+                        </td>
+                        <td>
+                            {{this.length}}
+                        </td>
+                        <td>
+                            {{this.width}}
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table class="misure-table">
+                <thead>
+                    <tr>
+                        <td>N</td>
+                        <td>Spess</td>
+                        <td>Lung</td>
+                        <td>Larg</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each measures3}}
+                    <tr nobr="true">
+                        <td>
+                            X
+                        </td>
+                        <td>
+                            {{this.thickness}}
+                        </td>
+                        <td>
+                            {{this.length}}
+                        </td>
+                        <td>
+                            {{this.width}}
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table class="misure-table">
+                <thead>
+                    <tr>
+                        <td>N</td>
+                        <td>Spess</td>
+                        <td>Lung</td>
+                        <td>Larg</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each measures4}}
+                    <tr nobr="true">
+                        <td>
+                            X
+                        </td>
+                        <td>
+                            {{this.thickness}}
+                        </td>
+                        <td>
+                            {{this.length}}
+                        </td>
+                        <td>
+                            {{this.width}}
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <table class="riepilogo-table">
+            <tbody>
+                <tr>
+                    <td>Pezzi</td>
+                    <td>{{pieces}}</td>
+                    <td>Totale mc</td>
+                    <td>{{totalVolume}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>

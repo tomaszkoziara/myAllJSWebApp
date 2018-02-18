@@ -34,6 +34,10 @@ class LotsController {
         this.$state.go("version", { id: id });
     }
 
+    downloadLotExport(lotId) {
+        this.lotService.getLotPdf(lotId);
+    }
+
     deleteLot(id) {
         var self = this;
         this.modalService.showConfirmModal({
@@ -42,9 +46,14 @@ class LotsController {
             cancelButtonText: "Annulla",
             actionButtonText: "OK"
         }).then(function () {
-            self.lotService.deleteLot(id);
-            self.loadLots();
-        })
+
+            return self.lotService.deleteLot(id);
+
+        }).then(function () {
+
+            return self.loadLots();
+
+        });
     }
 
 }

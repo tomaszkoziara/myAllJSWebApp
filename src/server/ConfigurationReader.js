@@ -1,19 +1,20 @@
-import path from "path";
 import properties from "properties";
 
-export default function readProperties() {
+export default function readConfiguration(configurationFilePath) {
 
     return new Promise(function (resolve, reject) {
-        properties.parse(path.resolve(__dirname, "server.properties"), {
+
+        properties.parse(configurationFilePath, {
             path: true,
             namespaces: true
         }, function (error, object) {
             if (error) {
-                reject("Cannot read server.properties\n" + error);
+                reject("Cannot read properties file: " + configurationFilePath + "\n" + error);
             } else {
                 resolve(object);
             }
         });
+
     });
 
 }
