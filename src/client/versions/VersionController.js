@@ -70,7 +70,7 @@ class VersionController {
 
     loadVersion() {
 
-        this.versionService.getVersion(this.lotId, this.currentVersionId).then((data) => {
+        return this.versionService.getVersion(this.lotId, this.currentVersionId).then((data) => {
 
             this.version = data;
             this.originalVersion = angular.copy(data);
@@ -144,20 +144,31 @@ class VersionController {
 
         }).then(() => {
 
-            this.versionService.getVersions(this.lotId).then((data) => {
+            return this.versionService.getVersions(this.lotId);
 
-                this.versions = data;
+        }).then((data) => {
 
-                this.currentVersionIndex = this.versions.length - 1;
-                this.currentVersionNumber = this.versions[this.currentVersionIndex].number;
-                this.currentVersionId = this.versions[this.currentVersionIndex].id;
+            this.versions = data;
 
-            }).then(() => {
+            this.currentVersionIndex = this.versions.length - 1;
+            this.currentVersionNumber = this.versions[this.currentVersionIndex].number;
+            this.currentVersionId = this.versions[this.currentVersionIndex].id;
 
-                this.loadVersion();
+            return Promise.resolve();
 
+        }).then(() => {
+
+            return this.loadVersion();
+
+        }).then(() => {
+            var total = this.reckonTotal();
+            var pieces = this.reckonPieces();
+
+            return this.lotService.updateLot({
+                id: this.lotId,
+                total: total,
+                pieces: pieces
             });
-
         }).catch(function (error) {
             console.log(error);
             console.log("Cancel new version creation.");
