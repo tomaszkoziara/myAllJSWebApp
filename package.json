@@ -55,7 +55,8 @@
     "bin": "dist/server.bundle.js",
     "pkg": {
         "assets": [
-            "dist/www/**/*"
+            "dist/www/**/*",
+            "dist/scripts/*"
         ],
         "targets": [
             "node8-win"

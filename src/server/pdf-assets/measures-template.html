@@ -118,6 +118,10 @@
             width: 24%;
             display: inline-block;
         }
+
+        .crossed {
+            text-decoration: line-through;
+        }
     </style>
     <div class="intestazione">
         <img class="logo" src="file:///%ASSETS_PATH%logo-legnami-nicolis.jpg">
@@ -190,15 +194,15 @@
                     {{#each measures1}}
                     <tr nobr="true">
                         <td>
-                            X
+                            {{this.index}}
                         </td>
-                        <td>
+                        <td class="{{#if this.deleted}}crossed{{/if}}">
                             {{this.thickness}}
                         </td>
-                        <td>
+                        <td class="{{#if this.deleted}}crossed{{/if}}">
                             {{this.length}}
                         </td>
-                        <td>
+                        <td class="{{#if this.deleted}}crossed{{/if}}">
                             {{this.width}}
                         </td>
                     </tr>
@@ -220,15 +224,15 @@
                     {{#each measures2}}
                     <tr nobr="true">
                         <td>
-                            X
+                            {{this.index}}
                         </td>
-                        <td>
+                        <td class="{{#if this.deleted}}crossed{{/if}}">
                             {{this.thickness}}
                         </td>
-                        <td>
+                        <td class="{{#if this.deleted}}crossed{{/if}}">
                             {{this.length}}
                         </td>
-                        <td>
+                        <td class="{{#if this.deleted}}crossed{{/if}}">
                             {{this.width}}
                         </td>
                     </tr>
@@ -250,15 +254,15 @@
                     {{#each measures3}}
                     <tr nobr="true">
                         <td>
-                            X
+                            {{this.index}}
                         </td>
-                        <td>
+                        <td class="{{#if this.deleted}}crossed{{/if}}">
                             {{this.thickness}}
                         </td>
-                        <td>
+                        <td class="{{#if this.deleted}}crossed{{/if}}">
                             {{this.length}}
                         </td>
-                        <td>
+                        <td class="{{#if this.deleted}}crossed{{/if}}">
                             {{this.width}}
                         </td>
                     </tr>
@@ -280,15 +284,15 @@
                     {{#each measures4}}
                     <tr nobr="true">
                         <td>
-                            X
+                            {{this.index}}
                         </td>
-                        <td>
+                        <td class="{{#if this.deleted}}crossed{{/if}}">
                             {{this.thickness}}
                         </td>
-                        <td>
+                        <td class="{{#if this.deleted}}crossed{{/if}}">
                             {{this.length}}
                         </td>
-                        <td>
+                        <td class="{{#if this.deleted}}crossed{{/if}}">
                             {{this.width}}
                         </td>
                     </tr>
@@ -304,7 +308,7 @@
                     <td>Pezzi</td>
                     <td>{{pieces}}</td>
                     <td>Totale mc</td>
-                    <td>{{totalVolume}}</td>
+                    <td>{{total}}</td>
                 </tr>
             </tbody>
         </table>

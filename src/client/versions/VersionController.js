@@ -176,6 +176,12 @@ class VersionController {
 
     }
 
+    cancelMeasureDisabled() {
+
+        return this.versions && (this.currentVersionIndex !== this.versions.length - 1);
+
+    }
+
     measuresDisabled() {
 
         return this.versions && this.versions.length > 1;

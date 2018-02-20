@@ -47,7 +47,7 @@
                     <tr ng-repeat="measure in ctrl.version.measures">
                         <td>{{$index + 1}}</td>
                         <td>
-                            <input class="form-check-input" ng-model="measure.delete" ng-disabled="{{measure.d_date !== null}}"
+                            <input class="form-check-input" ng-model="measure.delete" ng-disabled="{{measure.d_date !== null || ctrl.cancelMeasureDisabled()}}"
                                 type="checkbox" ng-checked="{{measure.d_date !== null}}"
                                 ng-change="ctrl.markAsChanged($index)">
                         </td>

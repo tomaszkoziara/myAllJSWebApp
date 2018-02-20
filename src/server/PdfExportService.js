@@ -35,7 +35,10 @@ export default class PdfExportService {
                 measuresIndex = 4;
             }
 
-            context["measures" + measuresIndex].push(this.formatMeasure(lastLotVersionResult.result.measures[i]));
+            var measureObject = this.formatMeasure(lastLotVersionResult.result.measures[i]);
+            measureObject.index = i + 1;
+
+            context["measures" + measuresIndex].push(measureObject);
         }
 
 
@@ -47,8 +50,27 @@ export default class PdfExportService {
 
     formatMeasure(measure) {
 
+        var newMeasure = {};
+
+        newMeasure.thickness = this.formatNumber(measure.thickness);
+        newMeasure.length = this.formatNumber(measure.length);
+        newMeasure.width = this.formatNumber(measure.width);
+        newMeasure.deleted = measure.d_date !== null;
+
+        return newMeasure;
+
+    }
+
+    formatNumber(measure) {
+
         if (typeof measure === "number") {
-            return measure.toFixed(2);
+            var measureSplitted = measure.toString().split(".");
+
+            var newMeasure = measureSplitted[0];
+            if (measureSplitted.length === 2) {
+                newMeasure += "." + measureSplitted[1].substring(0, 2);
+            }
+            return newMeasure;
         }
 
         return measure;
