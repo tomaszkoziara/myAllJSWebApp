@@ -1,5 +1,6 @@
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const path = require("path");
 const properties = require("./src/properties");
 
@@ -68,6 +69,7 @@ module.exports = {
             jQuery: "jquery",
             "window.jQuery": "jquery",
             Popper: ["popper.js", "default"]
-        })
+        }),
+        new UglifyJsPlugin()
     ]
 };

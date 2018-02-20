@@ -160,8 +160,6 @@ export default class UserService {
             this.percentageToUnit(modifiers.width)
         ]);
 
-        console.log("Executing " + sql);
-
         var data = await this.dbConnector.executeQuery(sql);
         return new Outcome(true, "");
     }

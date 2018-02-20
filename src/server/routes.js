@@ -138,17 +138,6 @@ export default function createRoutes(dbConnector) {
             context.response.set("Content-Type", "application/pdf");
             context.body = stream;
 
-            console.log("after----------");
-
-
-
-            // context.type = "application/pdf";
-            // context.body = readStream;
-
-            // console.log();
-            // console.log("------------------");
-            // console.log(context.res);
-            // .pipe(context.res);
         });
 
     const composedRoutes = KoaCompose([usersRouter.routes(), lotsRouter.routes()]);
