@@ -199,6 +199,13 @@ export default class UserService {
         return true;
     }
 
+    async callLongProcedure() {
+        const sql = SqlString.format(`call long_procedure;`);
+
+        var data = await this.dbConnector.executeQuery(sql);
+        return new Outcome(data, "");
+    }
+
     _createLotForInsert(lot) {
         lot.i_date = SqlString.raw("NOW()");
         return lot;

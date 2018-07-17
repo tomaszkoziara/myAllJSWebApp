@@ -11,7 +11,8 @@
         "watch_client": "webpack --config webpack.client.js --watch",
         "build_client": "webpack --config webpack.client.js",
         "run_server": "nodemon -r source-map-support/register dist/server.bundle.js --conf=dist/server.properties",
-        "build_app": "pkg . --output bin/app.exe"
+        "build_app": "pkg . --output bin/app.exe",
+        "start_dev": "START \"Watch server\" yarn watch_server && START \"Watch client\" yarn watch_client && START \"Run server\" yarn run_server"
     },
     "devDependencies": {
         "angular": "^1.6.8",

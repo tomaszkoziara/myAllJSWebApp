@@ -56,6 +56,10 @@ class LotsController {
         });
     }
 
+    callLongProcedure() {
+        this.lotService.callLongProcedure();
+    }
+
 }
 
 export default LotsController;

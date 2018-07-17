@@ -140,7 +140,14 @@ export default function createRoutes(dbConnector) {
 
         });
 
-    const composedRoutes = KoaCompose([usersRouter.routes(), lotsRouter.routes()]);
+    const otherRouter = new Router();
+    otherRouter.prefix("/api/other")
+        .get("/longprocedure", async function (context, next) {
+            var longProcedureResult = await lotService.callLongProcedure();
+            context.body = longProcedureResult;
+        })
+
+    const composedRoutes = KoaCompose([usersRouter.routes(), lotsRouter.routes(), otherRouter.routes()]);
 
     return composedRoutes;
 }

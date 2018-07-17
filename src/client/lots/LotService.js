@@ -34,6 +34,10 @@ class LotService {
     getLotPdf(lotId) {
         return this.APIService.downloadFile("/api/lots/" + lotId + "/pdf");
     }
+
+    callLongProcedure() {
+        return this.APIService.get("/api/other/longprocedure");
+    }
 }
 
 
